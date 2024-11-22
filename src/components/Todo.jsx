@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import mockTodoData from './data/Tododata';
 import TodoHd from './TodoHd';
 import TodoEditor from './TodoEditor';
@@ -8,6 +8,19 @@ import TodoList from './TodoList';
 const Todo = () => {
     const [plan, setPlan] = useState(mockTodoData);
 
+    //마운트 시
+    useEffect(() => {
+        const savedPlan = JSON.parse(localStorage.getItem('plan')) || [];
+        setPlan(savedPlan);
+    });
+
+    // 업데이트 시
+    useEffect(() => {
+        localStorage.setItem('plan', JSON.stringify(plan));
+
+        const savedPlan = JSON.parse(localStorage.getItem('plan')) || [];
+        setPlan(savedPlan);
+    }, [plan]);
     //할 일 추가하는 함수
     const addTodo = (task) => {
         const newTodo = {
