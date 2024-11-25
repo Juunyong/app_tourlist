@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TodoItem = ({ id, isDone, task, createdDate, onUpdate }) => {
+const TodoItem = ({ id, isDone, task, createdDate, onUpdate, onDelete }) => {
     console.log(`TodoItem ${task} : isDone = ${isDone} `);
     return (
         <div>
@@ -10,7 +10,7 @@ const TodoItem = ({ id, isDone, task, createdDate, onUpdate }) => {
                 <span>{new Date(createdDate).toLocaleDateString()}</span>
                 <button
                     onClick={() => {
-                        onDelete();
+                        onDelete(id);
                     }}
                 >
                     삭제
