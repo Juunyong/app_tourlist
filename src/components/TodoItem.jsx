@@ -1,22 +1,26 @@
+import classNames from 'classnames';
 import React from 'react';
 
-const TodoItem = ({ id, isDone, task, createdDate, onUpdate, onDelete }) => {
-    console.log(`TodoItem ${task} : isDone = ${isDone} `);
+const TodoItem = ({ id, task, isDone, createDate, onUpdate, onDelete }) => {
     return (
-        <div>
-            <li key={id}>
-                <input type="checkbox" checked={isDone} onChange={() => onUpdate(id)} />
-                <span className={`${isDone ? 'line-through text-gray-400' : 'no-underline text-black'}`}>{task}</span>
-                <span>{new Date(createdDate).toLocaleDateString()}</span>
-                <button
-                    onClick={() => {
-                        onDelete(id);
-                    }}
-                >
-                    삭제
-                </button>
-            </li>
-        </div>
+        <li key={id} className="pt-2 flex gap-2 items-center">
+            <input
+                type="checkbox"
+                checked={isDone}
+                onChange={() => {
+                    onUpdate(id);
+                }}
+            />
+            <strong className={classNames('py-2 text-lg', isDone ? 'line-through' : null)}>{task}</strong>
+            <span className="ml-auto text-sm text-gray-400">{createDate}</span>
+            <button
+                onClick={() => {
+                    onDelete(id);
+                }}
+            >
+                삭제
+            </button>
+        </li>
     );
 };
 

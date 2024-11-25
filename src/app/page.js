@@ -1,5 +1,14 @@
+'use client';
+
 import Todo from '@/components/Todo';
+import { useTheme } from '@/contexts/ThemeContext';
 
 export default function Home() {
-    return <Todo />;
+    const theme = useTheme();
+
+    return (
+        <div className={theme.background}>
+            <Todo />
+        </div>
+    );
 }
